@@ -1,8 +1,19 @@
 package models
 
+import "gorm.io/gorm"
+
 type Flashcard struct {
-	ID       uint   `gorm:"primaryKey"`
-	Title    string `json:"title"`
-	Front    string `json:"front"`  // Question/Description
-	Back     string `json:"back"`   // Réponse
+	gorm.Model
+	ID                uint   `gorm:"primaryKey" json:"id"`
+	CategoryID        uint   `json:"category_id"`
+	Title             string `json:"title"`
+	Description       string `json:"description"`
+	InformationNumber int    `json:"information_number"`
+	Answers           string `json:"answers"`
+}
+
+type Category struct {
+	gorm.Model
+	ID   uint   `gorm:"primaryKey" json:"id"`
+	Name string `json:"name"`
 }

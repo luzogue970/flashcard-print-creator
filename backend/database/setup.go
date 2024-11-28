@@ -2,18 +2,19 @@ package database
 
 import (
 	"log"
-	"gorm.io/driver/sqlite"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
 
 func ConnectDatabase() {
-	database, err := gorm.Open(sqlite.Open("flashcards.db"), &gorm.Config{})
+	dsn := "host=localhost user=admin password=a dbname=flashcards port=5432 sslmode=disable"
+	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
 	}
 
 	DB = database
-	log.Println("Database connected!")
+	log.Println("PostgreSQL database connected!")
 }
